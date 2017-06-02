@@ -98,9 +98,16 @@ public class TankMovement : MonoBehaviour
         // Adjust the position of the tank based on the player's input.
 		//vector movement    forward vector of tacnk  input value  speed   dt
 		Vector3 velocity = transform.forward * m_MovementInputValue * m_Speed;
-		//m_Rigidbody.MovePosition (m_Rigidbody.position + Velocity*Time.deltaTime); //doesn't work anymore see internet
-		m_Rigidbody.velocity = velocity;
-    }
+
+		//normally, this would not allow the dust trail to work correctly since
+		//it gets it's velocity value from the rigidbody (by using set position there is no velocity)
+		//However, by moving the dust particles under (childed) a different object with "is kinematic"
+		//this movePosition will work fine, see tank prefab
+		m_Rigidbody.MovePosition (m_Rigidbody.position + velocity*Time.deltaTime); 
+
+		//when setting velocity, the shell explosion doesn't push the tank back correctly
+		//m_Rigidbody.velocity = m_Rigidbody.velocity + velocity;
+	}
 
 	//turn the tank
     private void Turn()
