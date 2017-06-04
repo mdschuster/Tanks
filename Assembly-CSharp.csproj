@@ -92,7 +92,10 @@
      <Compile Include="Assets\PostProcessing\Runtime\Utils\RenderTextureFactory.cs" />
      <Compile Include="Assets\Scripts\Camera\CameraControl.cs" />
      <Compile Include="Assets\Scripts\Managers\GameManager.cs" />
+     <Compile Include="Assets\Scripts\Managers\PickupManager.cs" />
      <Compile Include="Assets\Scripts\Managers\TankManager.cs" />
+     <Compile Include="Assets\Scripts\Pickups\Pickup_Health.cs" />
+     <Compile Include="Assets\Scripts\Pickups\bobber.cs" />
      <Compile Include="Assets\Scripts\Shell\ShellExplosion.cs" />
      <Compile Include="Assets\Scripts\Tank\TankHealth.cs" />
      <Compile Include="Assets\Scripts\Tank\TankMovement.cs" />

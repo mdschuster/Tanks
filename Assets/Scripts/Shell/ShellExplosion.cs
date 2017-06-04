@@ -3,6 +3,7 @@
 public class ShellExplosion : MonoBehaviour
 {
     public LayerMask m_TankMask;   //all tanks are on layer mask
+	public LayerMask m_PickupMask;
     public ParticleSystem m_ExplosionParticles;       //explosion
     public AudioSource m_ExplosionAudio;       //audio source       
     public float m_MaxDamage = 100f;                  
@@ -20,6 +21,10 @@ public class ShellExplosion : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+		//make sure that the object is not hitting something from the pickup layer
+		if(m_PickupMask.value == (m_PickupMask.value | (1<<other.gameObject.layer))) {
+			return;
+		}
         // Find all the tanks in an area around the shell and damage them.
 
 		//explodes when it hits collider
