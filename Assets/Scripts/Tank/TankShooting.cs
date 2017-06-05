@@ -14,7 +14,9 @@ public class TankShooting : MonoBehaviour
     public float m_MaxLaunchForce = 30f; 
     public float m_MaxChargeTime = 0.75f;  //how long it takes to get from min force to max force
 
-    
+
+	private float m_ShotCooldown = 0.35f;
+	private float m_shotTime=0.0f;
     private string m_FireButton;         
     private float m_CurrentLaunchForce;  
     private float m_ChargeSpeed;         
@@ -42,7 +44,11 @@ public class TankShooting : MonoBehaviour
         // Track the current state of the fire button and make decisions based on the current launch force.
     	//multiple cases
 		m_AimSlider.value=m_MinLaunchForce; //default is smallest arrow (or no arrow)
-
+		m_shotTime -= Time.deltaTime;
+		//can't fire if the cooldown is still going
+		if (m_shotTime > 0.0f) {
+			return;
+		}
 		if (m_CurrentLaunchForce >= m_MaxLaunchForce && !m_Fired) {
 			//max charge but not fired
 			m_CurrentLaunchForce=m_MaxLaunchForce;
@@ -81,6 +87,8 @@ public class TankShooting : MonoBehaviour
 		m_ShootingAudio.Play ();
 
 		m_CurrentLaunchForce = m_MinLaunchForce;
+		m_shotTime = m_ShotCooldown;
+
 
     }
 }
