@@ -7,6 +7,7 @@ public class Pickup_Health : MonoBehaviour {
 	public LayerMask tankmask;
 	private TankHealth health;
 	private float healthAmount=20;
+	private int id;
 
 	void OnTriggerEnter(Collider other){
 		//checking if the layermask and layer are the same
@@ -27,10 +28,14 @@ public class Pickup_Health : MonoBehaviour {
 			health.TakeDamage (health.getHealth()-health.m_StartingHealth);
 		}
 
-		GetComponentInParent<PickupManager> ().Pickedup = true;
+		GetComponentInParent<PickupManager> ().Pickedup(true,this.id);
 
 		//destroy pickup
 		Destroy (gameObject);
 
+	}
+
+	public void setID(int id){
+		this.id = id;
 	}
 }

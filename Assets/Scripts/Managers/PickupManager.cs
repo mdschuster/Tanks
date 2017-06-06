@@ -10,37 +10,40 @@ public class PickupManager : MonoBehaviour {
 	private GameObject[] instance;
 	private float spawnCooldown=10.0f;
 	private float spawnTime;
-	private bool pickedup;
+	private bool[] pickedup;
+	private int spawnNumber=2;
 
 	private void Start(){
-		pickedup = true;
 		spawnTime = spawnCooldown;
 		instance = new GameObject[spawnLocations.Length];
+		pickedup = new bool[spawnNumber];
+		for (int i = 0; i < spawnNumber; i++) {
+			pickedup[i] = true;
+		}
 
 	}
 
 	public void CheckSpawn(){
 
-		if (pickedup) {
-			spawnTime -= Time.deltaTime;
-		}
-		if (spawnTime <= 0.0f && pickedup) {
-			for (int i = 0; i < spawnLocations.Length; i++) {
+		for (int i = 0; i < spawnLocations.Length; i++) {
+			if (pickedup[i]) {
+				spawnTime -= Time.deltaTime;
+			}
+			if (spawnTime <= 0.0f && pickedup[i]) {
 				instance [i] = (GameObject)Instantiate (health, spawnLocations [i].position, spawnLocations [i].rotation);
 				instance [i].transform.parent = GameObject.FindGameObjectWithTag ("PickupManager").transform;
+				instance [i].GetComponent<Pickup_Health> ().setID (i);
 				spawnTime = spawnCooldown;
-				pickedup = false;
+				pickedup[i] = false;
 			}
 		}
+
+
 		return;
 	}
 
-	public bool Pickedup {
-		get {
-			return pickedup;
-		}
-		set {
-			pickedup = value;
-		}
+	public void Pickedup(bool temp, int id){
+		this.pickedup [id] = temp;
 	}
+
 }

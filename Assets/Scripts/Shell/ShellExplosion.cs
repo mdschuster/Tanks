@@ -54,7 +54,7 @@ public class ShellExplosion : MonoBehaviour
 		m_ExplosionParticles.transform.parent = null; //unparent explosion, so it still plays when shell gets destroyed
 		m_ExplosionParticles.Play();
 		m_ExplosionAudio.Play ();
-		Destroy (m_ExplosionParticles.gameObject, m_ExplosionParticles.duration); //destroy only the explosion particles gameobject (not the particles themselves
+		Destroy (m_ExplosionParticles.gameObject, m_ExplosionParticles.main.duration); //destroy only the explosion particles gameobject (not the particles themselves
 		Destroy (gameObject);
 
     }
