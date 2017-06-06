@@ -13,7 +13,7 @@ public class Pickup_Health : MonoBehaviour {
 		if(tankmask.value != (tankmask.value | (1<<other.gameObject.layer))) {
 			return;
 		}
-		//grap the tank health component of the tank that ran over it
+		//grab the tank health component of the tank that ran over it
 		health = other.GetComponent<TankHealth> ();
 		//check if that tank already has max health
 		if (health.m_StartingHealth == health.getHealth ()) {
@@ -26,6 +26,8 @@ public class Pickup_Health : MonoBehaviour {
 		if (health.getHealth() > health.m_StartingHealth) {
 			health.TakeDamage (health.getHealth()-health.m_StartingHealth);
 		}
+
+		GetComponentInParent<PickupManager> ().Pickedup = true;
 
 		//destroy pickup
 		Destroy (gameObject);

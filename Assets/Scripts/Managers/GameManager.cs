@@ -11,7 +11,8 @@ public class GameManager : MonoBehaviour
     public CameraControl m_CameraControl;   
     public Text m_MessageText;              
     public GameObject m_TankPrefab;         
-    public TankManager[] m_Tanks;           
+    public TankManager[] m_Tanks;
+	public PickupManager m_Pickups;
 
 
     private int m_RoundNumber;              //current round number
@@ -116,6 +117,10 @@ public class GameManager : MonoBehaviour
 		m_MessageText.text = string.Empty;
 
 		while (!OneTankLeft ()) {
+
+			//check pickup spawn
+			m_Pickups.CheckSpawn();
+
 			yield return null; //with null, just means come back the next frame
 		}
 

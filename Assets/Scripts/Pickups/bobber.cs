@@ -5,19 +5,12 @@ using UnityEngine;
 public class bobber : MonoBehaviour {
 
 	private float speed = 1;
-	private float ypos;
 	private int direction = -1;
-	private Transform originalTransform;
+	//private Transform originalTransform;
 
-	// Use this for initialization
-	void Start () {
-		originalTransform = this.transform;
-		ypos = originalTransform.position.y;
-	}
-	
 	// Update is called once per frame
 	void Update () {
-		Vector3 y = new Vector3(0f,0f,0f);
+		Vector3 y = gameObject.transform.position;
 		//down first
 		y.y = this.transform.position.y;
 		y.y = y.y + speed * direction * Time.deltaTime;
