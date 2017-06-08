@@ -6,6 +6,7 @@ public class Pickup_Health : MonoBehaviour {
 
 	public LayerMask tankmask;
 	private TankHealth health;
+	private ParticleSystem pickupeffects;
 	private float healthAmount=20;
 	private int id;
 
@@ -31,6 +32,12 @@ public class Pickup_Health : MonoBehaviour {
 		GetComponentInParent<PickupManager> ().Pickedup(true,this.id);
 
 		//destroy pickup
+
+		pickupeffects = GetComponentInChildren<ParticleSystem> ();
+		pickupeffects.transform.parent = null;
+
+		pickupeffects.Play ();
+
 		Destroy (gameObject);
 
 	}
